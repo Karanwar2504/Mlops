@@ -16,15 +16,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: check out repo
+    - name: Check out repository
       uses: actions/checkout@v2
-    - name: azure login
+
+    - name: Azure login
       uses: azure/login@v1
       with:
-        creds: ${{secrets.AZURE_CREDENTIALS}}
-    - name: setup
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Setup environment
       run: bash setup.sh
-      continue-on-error: true
-    - name: run job
-      run: bash -x ../../run-job.sh pipeline.yml
+
+    - name: Run job
+      run: bash -x run-job.sh pipeline.yml
       working-directory: jobs/autompg_pipeline
